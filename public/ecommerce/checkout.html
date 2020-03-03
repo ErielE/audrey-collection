@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ShopMax &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+  <div class="site-wrap">
+    <div class="custom-border-bottom py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 mb-0"><a href="#">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Keranjang</strong></div>
+          </div>
+        </div>
+      </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <div class="border p-4 rounded" role="alert">
+              Returning customer? <a href="#">Click here</a> to login
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-5 mb-md-0">
+            <h2 class="h3 mb-3 text-black">Informasi Pengiriman</h2>
+            <div class="p-3 p-lg-5 border">
+
+              <div class="form-group">
+                <label for="" class="text-black">Nama Lengkap <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="first" name="customer_nama" required>
+                <p class="text-danger">{{ $errors->first('customer_nama') }}</p>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-6">
+                  <label for="" class="text-black">No Telp <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="number" name="customer_phone" required>
+                  <p class="text-danger">{{ $errors->first('customer_phone') }}</p>
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="text-black">Email <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                  <p class="text-danger">{{ $errors->first('email') }}</p>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label for="" class="text-black">Alamat Lengkap</label>
+                  <input type="text" class="form-control" id="add1" name="customer_alamat" required>
+                  <p class="text-danger">{{ $errors->first('customer_alamat') }}</p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="" class="text-black">Provinsi<span class="text-danger">*</span></label>
+                <select class="form-control" name="provinsi_id" id="provinsi_id" required>
+                    <option value="">Pilih Propinsi</option>
+                      <!-- LOOPING DATA PROVINsi UNTUK DIPILIH OLEH CUSTOMER -->
+                    @foreach ($provinsis as $row)
+                    <option value="{{ $row->id }}">{{ $row->nama }}</option>
+                    @endforeach
+                </select>
+                <p class="text-danger">{{ $errors->first('provinsi_id') }}</p>
+              </div>
+
+
+              <div class="form-group">
+                <label for="" class="text-black">Kabupaten / Kota <span class="text-danger">*</span></label>
+                <select class="form-control" name="kota_id" id="kota_id" required>
+                    <option value="">Pilih Kabupaten/Kota</option>
+                </select>
+                <p class="text-danger">{{ $errors->first('kota_id') }}</p>
+              </div>
+
+
+              <div class="form-group">
+                <label for="c_country" class="text-black">Kecamatan <span class="text-danger">*</span></label>
+                <select class="form-control" name="kabupaten_id" id="kabupaten_id" required>
+                    <option value="">Pilih Kecamatan</option>
+                </select>
+                <p class="text-danger">{{ $errors->first('kabupaten_id') }}</p>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Ringkasan Pesanan</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Produk</th>
+                      <th>Total</th>
+                    </thead>
+                    <tbody>
+                      @foreach ($carts as $cart)
+                      <tr>
+                        <td>{{ \Str::limit($cart['produk_nama'], 10) }}<strong class="mx-2">x {{ $cart['qty'] }}</strong> 1</td>
+                        <td>>Rp {{ number_format($cart['product_price']) }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-black font-weight-bold"><strong>Subtotal</strong></td>
+                        <td class="text-black">Rp {{ number_format($subtotal) }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-black font-weight-bold"><strong>Total</strong></td>
+                        <td class="text-black font-weight-bold"><strong>Rp {{ number_format($subtotal) }}</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='thankyou.html'">Bayar Pesanan</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- </form> -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+
+  <script src="js/main.js"></script>
+
+  </body>
+</html>
